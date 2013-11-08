@@ -215,6 +215,8 @@ module.exports = function (grunt) {
         }]
       }
     },
+
+
     // Put files not handled in other tasks here
     copy: {
       dist: {
@@ -286,13 +288,58 @@ module.exports = function (grunt) {
     },
     uglify: {
       dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
       }
-    }
+    },
+
+    requirejs: {
+            index: {
+                // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+                options: {
+                    // `name` and `out` is set by grunt-usemin
+                    name: 'index',
+                    baseUrl: '<%= yeoman.app %>/scripts/pages',
+                    out: '<%= yeoman.dist %>/scripts/pages/index.js',
+                    optimize: 'none',
+                    paths: {
+                        'templates': '../../.tmp/scripts/templates'
+                    },
+                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
+                    // https://github.com/yeoman/grunt-usemin/issues/30
+                    //generateSourceMaps: true,
+                    // required to support SourceMaps
+                    // http://requirejs.org/docs/errors.html#sourcemapcomments
+                    preserveLicenseComments: false,
+                    useStrict: true,
+                    wrap: true
+                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
+                }
+            },
+
+            about: {
+                // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+                options: {
+                    // `name` and `out` is set by grunt-usemin
+                    name: 'about',
+                    out: '<%= yeoman.dist %>/scripts/pages/about.js',
+                    baseUrl: '<%= yeoman.app %>/scripts/pages',
+                    optimize: 'none',
+                    paths: {
+                        'templates': '../../.tmp/scripts/templates'
+                    },
+                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
+                    // https://github.com/yeoman/grunt-usemin/issues/30
+                    //generateSourceMaps: true,
+                    // required to support SourceMaps
+                    // http://requirejs.org/docs/errors.html#sourcemapcomments
+                    preserveLicenseComments: false,
+                    useStrict: true,
+                    wrap: true
+                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
+                }
+            },
+
+     },
+
   });
 
   grunt.registerTask('server', function (target) {
@@ -320,6 +367,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'useminPrepare',
+    'requirejs',
     'concurrent:dist',
     'autoprefixer',
     'concat',
@@ -327,7 +375,7 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'cssmin',
-    'uglify',
+    //'uglify',
     'rev',
     'usemin'
   ]);
