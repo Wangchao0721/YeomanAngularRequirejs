@@ -13,13 +13,12 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: {
-      // configurable paths
-      app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      app: 'app',
+      dist: '../'
     },
     watch: {
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= yeoman.app %>/static/scripts/{,*/}*.coffee'],
         tasks: ['coffee:dist']
       },
       coffeeTest: {
@@ -27,7 +26,7 @@ module.exports = function (grunt) {
         tasks: ['coffee:test']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        files: ['<%= yeoman.app %>/static/styles/{,*/}*.css'],
         tasks: ['copy:styles', 'autoprefixer']
       },
       livereload: {
@@ -37,8 +36,8 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '{.tmp,<%= yeoman.app %>}/static/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/static/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -91,8 +90,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '<%= yeoman.dist %>/static/*'
           ]
         }]
       },
@@ -104,7 +102,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
+        '<%= yeoman.app %>/static/scripts/{,*/}*.js'
       ]
     },
     coffee: {
@@ -115,7 +113,7 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
+          cwd: '<%= yeoman.app %>/static/scripts',
           src: '{,*/}*.coffee',
           dest: '.tmp/scripts',
           ext: '.js'
@@ -140,10 +138,10 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/static/scripts/{,*/}*.js',
+            '<%= yeoman.dist %>/static/styles/{,*/}*.css',
+            '<%= yeoman.dist %>/static/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/static/styles/fonts/*'
           ]
         }
       }
@@ -156,7 +154,7 @@ module.exports = function (grunt) {
     },
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      css: ['<%= yeoman.dist %>/static/styles/{,*/}*.css'],
       options: {
         dirs: ['<%= yeoman.dist %>']
       }
@@ -165,9 +163,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/static/images',
           src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>/static/images'
         }]
       }
     },
@@ -175,9 +173,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/static/images',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>/static/images'
         }]
       }
     },
@@ -228,14 +226,14 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'static/bower_components/**/*',
+            'static/images/{,*/}*.{gif,webp}',
+            'static/styles/fonts/*'
           ]
         }, {
           expand: true,
           cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
+          dest: '<%= yeoman.dist %>/static/images',
           src: [
             'generated/*'
           ]
@@ -243,7 +241,7 @@ module.exports = function (grunt) {
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
+        cwd: '<%= yeoman.app %>/static/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
       }
@@ -280,9 +278,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
+          cwd: '<%= yeoman.dist %>/static/scripts',
           src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
+          dest: '<%= yeoman.dist %>/static/scripts'
         }]
       }
     },
@@ -300,8 +298,8 @@ module.exports = function (grunt) {
                 options: {
                     // `name` and `out` is set by grunt-usemin
                     name: 'index',
-                    baseUrl: '<%= yeoman.app %>/scripts/pages',
-                    out: '<%= yeoman.dist %>/scripts/pages/index.js',
+                    baseUrl: '<%= yeoman.app %>/static/scripts/pages',
+                    out: '<%= yeoman.dist %>/static/scripts/pages/index.js',
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates'
@@ -323,8 +321,8 @@ module.exports = function (grunt) {
                 options: {
                     // `name` and `out` is set by grunt-usemin
                     name: 'about',
-                    out: '<%= yeoman.dist %>/scripts/pages/about.js',
-                    baseUrl: '<%= yeoman.app %>/scripts/pages',
+                    out: '<%= yeoman.dist %>/static/scripts/pages/about.js',
+                    baseUrl: '<%= yeoman.app %>/static/scripts/pages',
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates'

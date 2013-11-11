@@ -28,7 +28,7 @@ require(['angular',
 	'angular-sanitize',
 	'../controllers/main', 
 	'../app',
-	'text!../../views/main.html'
+	'text!../views/main.html'
 	], function(angular, ngCookies,ngResource,ngSanitize,main,app,main_view) {
 
 		app.config(function($routeProvider) {
