@@ -31,7 +31,7 @@ require(['angular',
 	'text!../../views/main.html'
 	], function(angular, ngCookies,ngResource,ngSanitize,main,app,main_view) {
 
-		return app.config(function($routeProvider) {
+		app.config(function($routeProvider) {
 			$routeProvider
 			.when('/', {
 				template: main_view,

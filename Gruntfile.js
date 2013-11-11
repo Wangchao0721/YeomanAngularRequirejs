@@ -287,6 +287,9 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
+      options: {
+        mangle: true
+      },
       dist: {
       }
     },
