@@ -288,7 +288,7 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
-        mangle: true
+        mangle: false
       },
       dist: {
       }
@@ -378,7 +378,7 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'cssmin',
-    //'uglify',
+    'uglify',
     'rev',
     'usemin'
   ]);
